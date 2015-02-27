@@ -22,7 +22,7 @@ Usage
 
 - Next, in your `*.cpp` file, create a Vector of Sprites, `cocos2d::Vector<cocos2d::Sprites*>`, containing the objects you'd like displayed in the tray. The item at index 0 will be selected by default.
 - After that, create a `Rect` with the origin, width, and height you'd like to be used for the Tray's button, minus the width of the toggle button (defined in `TraySlider.cpp` - 18px by default).
-- Then, create the `cocos2d::Color4F` colors you'd like to use for various portions of the buttons and tray.
+- Then, create the `cocos2d::Color4F` colors you'd like to use for the various parts of the buttons and tray.
 - Lastly, create the TraySlider object with `TraySlider::createWithSpritesRectAndColors(cocos2d::Vector<cocos2d::Sprite*> pSprite, cocos2d::Rect pRect, cocos2d::Color4F pBtnColor, cocos2d::Color4F pBtnBrdrColor, cocos2d::Color4F pTrayColor, cocos2d::Color4F pTrayBrdrColor, cocos2d::Color4F pTrayBtnColor, cocos2d::Color4F pTrayBtnBrdrColor)` and add it to your scene.
 
 - Example below of adding a list of bomb SpriteFrames to the tray with a button starting at 50,50 and a width/height of 60.

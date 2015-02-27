@@ -45,7 +45,7 @@ Usage
 ```
 
 - Note: The Sprites passed-in will be be scaled down to fit into the Rect with additional padding.
-- Note: Though the Rect passed-in on creation can be any size, there is no check to make sure the button or tray stays on the screen.
+- Note: Though the Rect passed-in on creation can be any size and at any origin, there is no check to make sure the button or tray stays on the screen.
 - Note: The toggle arrow is not created programmatically as the diagonal lines didn't look right when rendered. Smaller Rects (< 21 px) will result in this png sticking out of its box. If a smaller Rect is needed, you'll need to create a new toggle arrow.
 
 ###Reacting to touches

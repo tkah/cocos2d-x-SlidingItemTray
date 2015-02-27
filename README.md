@@ -12,6 +12,8 @@ Copy `TraySlider.h` and `TraySlider.cpp` into your `Classes` folder. Copy `toggl
 
 Usage
 -----
+###Creating the TraySlider object
+
 - Create a new tray object in your header file:
 
 ```cpp
@@ -23,7 +25,7 @@ Usage
 - Then, create the colors you'd like to use for various portions of the buttons and tray as `cocos2d::Color4F`s.
 - Lastly, create the TraySlider object with `TraySlider::createWithSpritesRectAndColors(cocos2d::Vector<cocos2d::Sprite*> pSprite, cocos2d::Rect pRect, cocos2d::Color4F pBtnColor, cocos2d::Color4F pBtnBrdrColor, cocos2d::Color4F pTrayColor, cocos2d::Color4F pTrayBrdrColor, cocos2d::Color4F pTrayBtnColor, cocos2d::Color4F pTrayBtnBrdrColor)` and add it to your scene.
 
-+ Example below of adding a list of bomb SpriteFrames to the tray with a button starting at 50,50 and a width/height of 60.
+- Example below of adding a list of bomb SpriteFrames to the tray with a button starting at 50,50 and a width/height of 60.
 
 ```cpp
     cocos2d::Vector<cocos2d::Sprite*> bombFrames;
@@ -42,9 +44,39 @@ Usage
     this->addChild(tray, 20);
 ```
 
+- Note: The Sprites passed-in will be be scaled down to fit into the Rect will an additional .1 for padding.
+- Note: Though the Rect passed-in on creation can be any size, there is no check to make sure the button or tray stays on the screen.
+- Note: The toggle arrow is not created programmatically as the diagonal lines didn't look right when rendered. Smaller Rects will result in the this png sticking out of its box. If a small Rect is needed, a new toggle arrow can be easily replaced.
+
+###Reacting to touches
+
+- Use something similar to the following in your scene's `onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)` method.
+
+```cpp
+    Point location = touch->getLocationInView();
+    location = Director::getInstance()->convertToGL(location);
+    if (tray->inBounds(location)) {
+        if (tray->isOpen() && !tray->moving()) {
+            tray->close();
+        }
+        else if (!tray->moving()) {
+            tray->open();
+        }
+    }
+```
+
+- `inBounds()` will check to see if the touch event was within the bounds of the tray.
+- `isOpen()` returns a bool corresponding to the open state of the tray.
+- `moving()` returns a bool corresponding to the moving state of the tray and is necessary to prevent multiple touches firing the open/close functions.
+- `open()` & `close()` are fairly self-explanatory.
+
+###Getting selected item
+
+- Using `getSelected()` will return the index of the currently selected Sprite from the passed-in Vector.
+
 Developed By
 -------
-Torran Kahleck (tkah)
+[Torran Kahleck](http://www.torrankaleke.com/ "Personal Site") (tkah)
 
 License
 -------
